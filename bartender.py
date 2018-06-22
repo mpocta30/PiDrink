@@ -285,7 +285,7 @@ class Bartender(MenuDelegate):
 			process.start()
 
 		# start the progress bar
-		#self.progressBar(waitTime)
+		# self.progressBar(waitTime)
 
 		# wait for threads to finish
 		for process in pumpProcesses:
@@ -347,7 +347,7 @@ class Bartender(MenuDelegate):
 		GPIO.output(pin, GPIO.HIGH)
 
 	def progressBar(self, waitTime):
-		interval = ((waitTime / 100.0) - 0.25)
+		interval = ((waitTime / 100.0))
         
                 for x in range(1, 101):
 		        #Clear display
