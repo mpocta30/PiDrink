@@ -366,6 +366,7 @@ class Bartender(MenuDelegate):
 	def makeDrink(self, drink, ingredients):
 		# cancel any button presses while the drink is being made
 		# self.stopInterrupts()
+		print('Making a ' + drink)
 		self.running = True
 
 		# launch a thread to control lighting
@@ -385,8 +386,8 @@ class Bartender(MenuDelegate):
 					pumpProcesses.append(pump_p)
 
                 
-                disp_process = Process(target=self.progressBar, args=(waitTime,))
-                pumpProcesses.append(disp_process) 
+                #disp_process = Process(target=self.progressBar, args=(maxTime,))
+                #pumpProcesses.append(disp_process) 
 
                 # start the pump threads
 		for process in pumpProcesses:
@@ -412,6 +413,7 @@ class Bartender(MenuDelegate):
 		time.sleep(2);
 		# self.startInterrupts()
 		self.running = False
+		print('Finished making ' + drink)
 
 
 		# show the main menu
