@@ -29,7 +29,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 from multiprocessing import Process
-from dotstar import Adafruit_DotStar
+#from dotstar import Adafruit_DotStar
 from menu import MenuItem, Menu, Back, MenuContext, MenuDelegate
 from drinks import drink_list, drink_options
 
@@ -111,19 +111,19 @@ class Bartender(MenuDelegate):
 			GPIO.setup(self.pump_configuration[pump]["pin"], GPIO.OUT, initial=GPIO.HIGH)
 
 		# setup pixels:
-		self.numpixels = NUMBER_NEOPIXELS # Number of LEDs in strip
+		#self.numpixels = NUMBER_NEOPIXELS # Number of LEDs in strip
 
 		# Here's how to control the strip from any two GPIO pins:
-		datapin  = NEOPIXEL_DATA_PIN
-		clockpin = NEOPIXEL_CLOCK_PIN
-		self.strip = Adafruit_DotStar(self.numpixels, datapin, clockpin)
-		self.strip.begin()           # Initialize pins for output
+		#datapin  = NEOPIXEL_DATA_PIN
+		#clockpin = NEOPIXEL_CLOCK_PIN
+		#self.strip = Adafruit_DotStar(self.numpixels, datapin, clockpin)
+		#self.strip.begin()           # Initialize pins for output
 		self.strip.setBrightness(NEOPIXEL_BRIGHTNESS) # Limit brightness to ~1/4 duty cycle
 
 		# turn everything off
-		for i in range(0, self.numpixels):
-			self.strip.setPixelColor(i, 0)
-		self.strip.show() 
+		#for i in range(0, self.numpixels):
+		#	self.strip.setPixelColor(i, 0)
+		#self.strip.show() 
 
 		print('Done initializing')
 
