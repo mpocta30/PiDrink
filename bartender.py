@@ -50,7 +50,7 @@ LEFT_PIN_BOUNCE = 1000
 RIGHT_BTN_PIN = 5
 RIGHT_PIN_BOUNCE = 2000
 
-Make_Drink = True
+MAKE_DRINK = True
 
 OLED_RESET_PIN = 15
 OLED_DC_PIN = 16
@@ -154,7 +154,7 @@ class Bartender(MenuDelegate):
 		    currmen = self.menuContext.currentMenu.getSelection()
                     if(currmen.name == mail):
 			self.makeDrink(currmen.name, currmen.attributes["ingredients"])
-			Make_Drink = False
+			MAKE_DRINK = False
                         found = True
                     else:
                         self.menuContext.currentMenu.nextSelection()
@@ -256,18 +256,18 @@ class Bartender(MenuDelegate):
 
 	def menuItemClicked(self, menuItem):
 		if (menuItem.type == "drink"):
-			if Make_Drink:
+			if MAKE_DRINK:
 				self.makeDrink(menuItem.name, menuItem.attributes["ingredients"])
-				Make_Drink = False
+				MAKE_DRINK = False
 			return True
 		elif(menuItem.type == "pump_selection"):
 			self.pump_configuration[menuItem.attributes["key"]]["value"] = menuItem.attributes["value"]
 			Bartender.writePumpConfiguration(self.pump_configuration)
 			return True
 		elif(menuItem.type == "clean"):
-			if Make_Drink:
+			if MAKE_DRINK:
 				self.clean()
-				Make_Drink = False
+				MAKE_DRINK = False
 			return True
 		return False
 
@@ -303,7 +303,7 @@ class Bartender(MenuDelegate):
 		# reenable interrupts
 		# self.startInterrupts()
 		self.running = False
-		Make_Drink = True
+		MAKE_DRINK = True
 
                 self.menuContext.showMenu()
 
@@ -422,7 +422,7 @@ class Bartender(MenuDelegate):
 		# self.startInterrupts()
 		self.running = False
 		print('Finished making ' + drink)
-		Make_Drink = True
+		MAKE_DRINK = True
 
 
 		# show the main menu
