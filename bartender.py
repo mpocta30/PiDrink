@@ -118,7 +118,7 @@ class Bartender(MenuDelegate):
 		#clockpin = NEOPIXEL_CLOCK_PIN
 		#self.strip = Adafruit_DotStar(self.numpixels, datapin, clockpin)
 		#self.strip.begin()           # Initialize pins for output
-		self.strip.setBrightness(NEOPIXEL_BRIGHTNESS) # Limit brightness to ~1/4 duty cycle
+		#self.strip.setBrightness(NEOPIXEL_BRIGHTNESS) # Limit brightness to ~1/4 duty cycle
 
 		# turn everything off
 		#for i in range(0, self.numpixels):
