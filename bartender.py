@@ -70,6 +70,8 @@ class Bartender(MenuDelegate):
 		# set the oled screen height
 		self.screen_width = SCREEN_WIDTH
 		self.screen_height = SCREEN_HEIGHT
+		
+		self.make_drink = MAKE_DRINK
 
 		self.btn1Pin = LEFT_BTN_PIN
 		self.btn2Pin = RIGHT_BTN_PIN
@@ -154,7 +156,7 @@ class Bartender(MenuDelegate):
 		    currmen = self.menuContext.currentMenu.getSelection()
                     if(currmen.name == mail):
 			self.makeDrink(currmen.name, currmen.attributes["ingredients"])
-			MAKE_DRINK = False
+			self.make_drink = False
                         found = True
                     else:
                         self.menuContext.currentMenu.nextSelection()
@@ -256,18 +258,18 @@ class Bartender(MenuDelegate):
 
 	def menuItemClicked(self, menuItem):
 		if (menuItem.type == "drink"):
-			if MAKE_DRINK:
+			if self.make_drink:
 				self.makeDrink(menuItem.name, menuItem.attributes["ingredients"])
-				MAKE_DRINK = False
+				self.make_drink = False
 			return True
 		elif(menuItem.type == "pump_selection"):
 			self.pump_configuration[menuItem.attributes["key"]]["value"] = menuItem.attributes["value"]
 			Bartender.writePumpConfiguration(self.pump_configuration)
 			return True
 		elif(menuItem.type == "clean"):
-			if MAKE_DRINK:
+			if self.make_drink:
 				self.clean()
-				MAKE_DRINK = False
+				self.make_drink = False
 			return True
 		return False
 
@@ -303,7 +305,7 @@ class Bartender(MenuDelegate):
 		# reenable interrupts
 		# self.startInterrupts()
 		self.running = False
-		MAKE_DRINK = True
+		self.make_drink = True
 
                 self.menuContext.showMenu()
 
@@ -422,7 +424,7 @@ class Bartender(MenuDelegate):
 		# self.startInterrupts()
 		self.running = False
 		print('Finished making ' + drink)
-		MAKE_DRINK = True
+		self.make_drink = True
 
 
 		# show the main menu
