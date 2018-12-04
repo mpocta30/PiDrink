@@ -64,7 +64,7 @@ FLOW_RATE = 60.0/100.0
 
 class Bartender(MenuDelegate): 
         
-        def __init__(self):
+	def __init__(self):
 		self.running = False
 
 		# set the oled screen height
@@ -76,38 +76,38 @@ class Bartender(MenuDelegate):
 		self.btn1Pin = LEFT_BTN_PIN
 		self.btn2Pin = RIGHT_BTN_PIN
 
-                self.clk = CLK_PIN
-                self.dt = DT_PIN
+		self.clk = CLK_PIN
+		self.dt = DT_PIN
 
 	 	# configure interrupts for buttons
 		#GPIO.setup(self.btn1Pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 		GPIO.setup(self.btn2Pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)  
 
-                # configure interrupts for encoder
-                GPIO.setup(self.clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
-                GPIO.setup(self.dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		# configure interrupts for encoder
+		GPIO.setup(self.clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+		GPIO.setup(self.dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-                #Pi config
-                RST = 24
-                DC = 23
-                SPI_PORT = 0
-                SPI_DEVICE = 0
+		#Pi config
+		RST = 24
+		DC = 23
+		SPI_PORT = 0
+		SPI_DEVICE = 0
 
 		# configure screen
 		self.disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST)
-                self.disp.begin()
-                self.disp.clear()
-                self.disp.display()
+		self.disp.begin()
+		self.disp.clear()
+		self.disp.display()
 
-                #draw
-                self.image = Image.new('1', (SCREEN_WIDTH, SCREEN_HEIGHT))
-                self.draw = ImageDraw.Draw(self.image)
-                self.draw.rectangle((0,0,SCREEN_WIDTH,SCREEN_HEIGHT), outline=0, fill=0)
-                self.font = ImageFont.load_default()
+		#draw
+		self.image = Image.new('1', (SCREEN_WIDTH, SCREEN_HEIGHT))
+		self.draw = ImageDraw.Draw(self.image)
+		self.draw.rectangle((0,0,SCREEN_WIDTH,SCREEN_HEIGHT), outline=0, fill=0)
+		self.font = ImageFont.load_default()
 		gpio = gaugette.gpio.GPIO()
 
 		# Very important... This lets py-gaugette 'know' what pins to use in order to reset the display
- # Change rows & cols values depending on your display dimensions.
+ 		# Change rows & cols values depending on your display dimensions.
 
 		# load the pump configuration from file
 		self.pump_configuration = Bartender.readPumpConfiguration()
