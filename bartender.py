@@ -88,8 +88,8 @@ class Bartender(MenuDelegate):
 		GPIO.setup(self.dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 		#Pi config
-		RST = 24
-		DC = 23
+		RST = 21
+		DC = 20
 		SPI_PORT = 0
 		SPI_DEVICE = 0
 
