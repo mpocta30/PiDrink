@@ -132,35 +132,36 @@ class Bartender(MenuDelegate):
 		print('Done initializing')
 
 
-        def check_email(self):
-            status, email_ids = self.imap_server.search(None, '(UNSEEN)')
-            if email_ids == ['']:
-                mail_list = []
-            else:
-                mail_list = self.get_subjects(email_ids) #FYI when calling the get_subjects function, the email is marked as 'read'
-            self.imap_server.close()
-            return mail_list
+	def check_email(self):
+		status, email_ids = self.imap_server.search(None, '(UNSEEN)')
+		if email_ids == ['']:
+			mail_list = []
+		else:
+			mail_list = self.get_subjects(email_ids) #FYI when calling the get_subjects function, the email is marked as 'read'
+		self.imap_server.close()
+		return mail_list
 
-        def get_subjects(self, email_ids):
-	    subjects_list = []
-	    for e_id in email_ids[0].split():
-		resp, data = self.imap_server.fetch(e_id, '(RFC822)')
-		perf = HeaderParser().parsestr(data[0][1])
-		subjects_list.append(perf['Subject'])
-	    return subjects_list
+	def get_subjects(self, email_ids):
+		subjects_list = []
+		for e_id in email_ids[0].split():
+			resp, data = self.imap_server.fetch(e_id, '(RFC822)')
+			perf = HeaderParser().parsestr(data[0][1])
+			subjects_list.append(perf['Subject'])
 
-        def voice_command(self, mail_list):
-	    for mail in mail_list:
-                found = False
-                while(found == False):
-		    currmen = self.menuContext.currentMenu.getSelection()
-                    if(currmen.name == mail):
-			self.makeDrink(currmen.name, currmen.attributes["ingredients"])
-			self.make_drink = False
-                        found = True
-                    else:
-                        self.menuContext.currentMenu.nextSelection()
-            found = False
+		return subjects_list
+
+	def voice_command(self, mail_list):
+		for mail in mail_list:
+			found = False
+			while(found == False):
+				currmen = self.menuContext.currentMenu.getSelection()
+				if(currmen.name == mail):
+					self.makeDrink(currmen.name, currmen.attributes["ingredients"])
+					self.make_drink = False
+					found = True
+				else:
+					self.menuContext.currentMenu.nextSelection()
+			found = False
 
 	@staticmethod
 	def readPumpConfiguration():
@@ -179,7 +180,7 @@ class Bartender(MenuDelegate):
 	def stopInterrupts(self):
 		#GPIO.remove_event_detect(self.btn1Pin)
 		GPIO.remove_event_detect(self.btn2Pin)
-                GPIO.remove_event_detect(self.clk)
+		GPIO.remove_event_detect(self.clk)
 
 	def buildMenu(self, drink_list, drink_options):
 		# create a new main menu
@@ -283,10 +284,10 @@ class Bartender(MenuDelegate):
 
 		for pump in self.pump_configuration.keys():
 			pump_p = Process(target=self.pour, args=(self.pump_configuration[pump]["pin"], waitTime))
-                        pumpProcesses.append(pump_p)
+			pumpProcesses.append(pump_p)
 
-                disp_process = Process(target=self.progressBar, args=(waitTime,))
-                pumpProcesses.append(disp_process) 
+			disp_process = Process(target=self.progressBar, args=(waitTime,))
+			pumpProcesses.append(disp_process) 
 
 		# start the pump threads
 		for process in pumpProcesses:
@@ -300,21 +301,21 @@ class Bartender(MenuDelegate):
 			process.join()
 
 		# sleep for a couple seconds to make sure the interrupts don't get triggered
-		time.sleep(2);
+		time.sleep(2)
 
 		# reenable interrupts
 		# self.startInterrupts()
 		self.running = False
 		self.make_drink = True
 
-                self.menuContext.showMenu()
+		self.menuContext.showMenu()
 
 	def displayMenuItem(self, menuItem):
 		#Clear display
-                self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
+		self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
 		self.draw.text((20,10), menuItem.name, font=self.font, fill=255)
 		self.disp.image(self.image)
-                self.disp.display()
+		self.disp.display()
 
 	def cycleLights(self):
 		t = threading.currentThread()
@@ -358,15 +359,15 @@ class Bartender(MenuDelegate):
 	def progressBar(self, waitTime):
 		interval = waitTime / 100.0
         
-                for x in range(1, 101):
-		        #Clear display
-                        self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
-		        self.updateProgressBar(x, y=10)
-                        self.disp.image(self.image)
-                        self.disp.display()
+		for x in range(1, 101):
+		#Clear display
+			self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
+			self.updateProgressBar(x, y=10)
+			self.disp.image(self.image)
+			self.disp.display()
 			time.sleep(interval)
-		self.disp.clear()
-		self.disp.display()
+			self.disp.clear()
+			self.disp.display()
 
                # self.image = Image.open('happycat_oled_32.ppm').convert('1')
 
@@ -390,7 +391,7 @@ class Bartender(MenuDelegate):
 			for pump in self.pump_configuration.keys():
 				if ing == self.pump_configuration[pump]["value"]:
 					waitTime = ingredients[ing] * FLOW_RATE
-                                        if (waitTime > maxTime):
+					if (waitTime > maxTime):
 						maxTime = waitTime
 					pump_p = Process(target=self.pour, args=(self.pump_configuration[pump]["pin"], waitTime))
 					pumpProcesses.append(pump_p)
@@ -403,12 +404,12 @@ class Bartender(MenuDelegate):
 		for process in pumpProcesses:
 			process.start()
 
-                # start display
-                self.progressBar(maxTime)
+		# start display
+		self.progressBar(maxTime)
 
 		# wait for threads to finish
-                for process in pumpProcesses:
-                        process.join()
+		for process in pumpProcesses:
+				process.join()
 
 		# stop the light thread
 	    #	lightsThread.do_run = False
@@ -420,7 +421,7 @@ class Bartender(MenuDelegate):
 
 		# reenable interrupts
 		# sleep for a couple seconds to make sure the interrupts don't get triggered
-		time.sleep(2);
+		time.sleep(2)
 		# self.startInterrupts()
 		self.running = False
 		print('Finished making ' + drink)
@@ -438,28 +439,28 @@ class Bartender(MenuDelegate):
 		if not self.running:
 			self.menuContext.select()
 
-        def rotary_on_change(self, ctx):
-            if not self.running:
-                    if GPIO.input(self.dt):
-                        self.menuContext.retreat()
-                    else:
-                        self.menuContext.advance()
+	def rotary_on_change(self, ctx):
+		if not self.running:
+			if GPIO.input(self.dt):
+				self.menuContext.retreat()
+			else:
+				self.menuContext.advance()
 
 	def updateProgressBar(self, percent, x=15, y=10):
 	   
 		height = 10
-                width = self.screen_width-2*x
+		width = self.screen_width-2*x
 
 		for w in range(0, width):
-		        self.draw.point((w + x, y),fill=255)
-		        self.draw.point((w + x, y + height),fill=255)
+			self.draw.point((w + x, y),fill=255)
+			self.draw.point((w + x, y + height),fill=255)
 		for h in range(0, height):
-		        self.draw.point((x, h + y),fill=255)
+			self.draw.point((x, h + y),fill=255)
 			self.draw.point((self.screen_width-x, h + y),fill=255)
-                        for p in range(0, percent):
-		            p_loc = int(p/100.0*width)
-		            self.draw.point((x + p_loc, h + y),fill=255)
-                            self.draw.text((55,20), str(percent) + '%', font = self.font, fill=255)
+			for p in range(0, percent):
+				p_loc = int(p/100.0*width)
+				self.draw.point((x + p_loc, h + y),fill=255)
+				self.draw.text((55,20), str(percent) + '%', font = self.font, fill=255)
                 #self.disp.image(self.image)
 	        #self.disp.display()
 
@@ -468,12 +469,12 @@ class Bartender(MenuDelegate):
 		# main loop
 		try:  
 			while True:
-                                self.imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
-                                self.imap_server.login(USERNAME, PASSWORD)
-                                self.imap_server.select('INBOX')
-                                mail_list = self.check_email()
-                                if mail_list and not self.running:
-                                    self.voice_command(mail_list)
+				self.imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
+				self.imap_server.login(USERNAME, PASSWORD)
+				self.imap_server.select('INBOX')
+				mail_list = self.check_email()
+				if mail_list and not self.running:
+					self.voice_command(mail_list)
 				time.sleep(0.1)
 		  
 		except KeyboardInterrupt:  
