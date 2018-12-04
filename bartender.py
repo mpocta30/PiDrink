@@ -384,7 +384,8 @@ class Bartender(MenuDelegate):
 	#	lightsThread = threading.Thread(target=self.cycleLights)
 	#	lightsThread.start()
 
-		# Parse the drink ingredients and spawn threads for pumps
+		# Make a list for each potential time
+
 		maxTime = 0
 		pumpProcesses = []
 		for ing in ingredients.keys():
@@ -409,7 +410,7 @@ class Bartender(MenuDelegate):
 
 		# wait for threads to finish
 		for process in pumpProcesses:
-				process.join()
+			process.join()
 
 		# stop the light thread
 	    #	lightsThread.do_run = False
