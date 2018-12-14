@@ -31,7 +31,6 @@ from PIL import ImageFont
 from multiprocessing import Process
 #from dotstar import Adafruit_DotStar
 from menu import MenuItem, Menu, Back, MenuContext, MenuDelegate
-from drinks import drink_list, drink_options
 
 GPIO.setmode(GPIO.BCM)
 
@@ -110,9 +109,17 @@ class Bartender(MenuDelegate):
  		# Change rows & cols values depending on your display dimensions.
 
 		# load the pump configuration from file
-		self.pump_configuration = Bartender.readPumpConfiguration()
+		self.pump_configuration = Bartender.readJson('pump_config.json')
 		for pump in self.pump_configuration.keys():
 			GPIO.setup(self.pump_configuration[pump]["pin"], GPIO.OUT, initial=GPIO.HIGH)
+
+		# load the current drink list
+		self.drink_list = Bartender.readJson('drink_list.json')
+		self.drink_list = self.drink_list["drink_list"]
+
+		# load the current drink options
+		self.drink_options = Bartender.readJson('drink_options.json')
+		self.drink_options = self.drink_options["drink_options"]
 
 		# setup pixels:
 		#self.numpixels = NUMBER_NEOPIXELS # Number of LEDs in strip
@@ -164,8 +171,8 @@ class Bartender(MenuDelegate):
 			found = False
 
 	@staticmethod
-	def readPumpConfiguration():
-		return json.load(open('pump_config.json'))
+	def readJson(file):
+		return json.load(open(file))
 
 	@staticmethod
 	def writePumpConfiguration(configuration):
@@ -182,13 +189,13 @@ class Bartender(MenuDelegate):
 		GPIO.remove_event_detect(self.btn2Pin)
 		GPIO.remove_event_detect(self.clk)
 
-	def buildMenu(self, drink_list, drink_options):
+	def buildMenu(self):
 		# create a new main menu
 		m = Menu("Main Menu")
 
 		# add drink options
 		drink_opts = []
-		for d in drink_list:
+		for d in self.drink_list:
 			drink_opts.append(MenuItem('drink', d["name"], {"ingredients": d["ingredients"]}))
 
 		configuration_menu = Menu("Configure")
@@ -198,7 +205,7 @@ class Bartender(MenuDelegate):
 		for p in sorted(self.pump_configuration.keys()):
 			config = Menu(self.pump_configuration[p]["name"])
 			# add fluid options for each pump
-			for opt in drink_options:
+			for opt in self.drink_options:
 				# star the selected option
 				selected = "*" if opt["value"] == self.pump_configuration[p]["value"] else ""
 				config.addOption(MenuItem('pump_selection', opt["name"], {"key": p, "value": opt["value"], "name": opt["name"]}))
@@ -486,7 +493,7 @@ class Bartender(MenuDelegate):
 
 
 bartender = Bartender()
-bartender.buildMenu(drink_list, drink_options)
+bartender.buildMenu()
 bartender.run()
 
 
