@@ -151,7 +151,9 @@ $( document ).ready(function() {
         $.ajax({
             url: '/changepumps',
             type: 'POST',
-            data: {mydata: JSON.stringify(pump_values)},   
+            data: {
+                pumps: JSON.stringify(pump_values)
+            },   
         });
     });
 });
