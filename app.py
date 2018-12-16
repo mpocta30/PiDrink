@@ -37,7 +37,7 @@ def change_pumps():
 # main driver function 
 if __name__ == '__main__': 
 
-    bartender = Bartender()
+    bartender = Bartender.Bartender()
     bartender.buildMenu()
     bartender.run()
 
