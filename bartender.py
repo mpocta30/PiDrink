@@ -15,15 +15,15 @@ from subprocess import *
 from subprocess import call
 
 #imports for email
-import imaplib 
-import smtplib 
-import email 
-from email.mime.text import MIMEText 
-from email.parser import HeaderParser 
-from email.MIMEMultipart import MIMEMultipart 
-from email.MIMEBase import MIMEBase 
-from email.Utils import COMMASPACE, formatdate
-from email import Encoders
+# import imaplib 
+# import smtplib 
+# import email 
+# from email.mime.text import MIMEText 
+# from email.parser import HeaderParser 
+# from email.MIMEMultipart import MIMEMultipart 
+# from email.MIMEBase import MIMEBase 
+# from email.Utils import COMMASPACE, formatdate
+# from email import Encoders
 
 from PIL import Image
 from PIL import ImageDraw
@@ -139,23 +139,23 @@ class Bartender(MenuDelegate):
 		print('Done initializing')
 
 
-	def check_email(self):
-		status, email_ids = self.imap_server.search(None, '(UNSEEN)')
-		if email_ids == ['']:
-			mail_list = []
-		else:
-			mail_list = self.get_subjects(email_ids) #FYI when calling the get_subjects function, the email is marked as 'read'
-		self.imap_server.close()
-		return mail_list
+	# def check_email(self):
+	# 	status, email_ids = self.imap_server.search(None, '(UNSEEN)')
+	# 	if email_ids == ['']:
+	# 		mail_list = []
+	# 	else:
+	# 		mail_list = self.get_subjects(email_ids) #FYI when calling the get_subjects function, the email is marked as 'read'
+	# 	self.imap_server.close()
+	# 	return mail_list
 
-	def get_subjects(self, email_ids):
-		subjects_list = []
-		for e_id in email_ids[0].split():
-			resp, data = self.imap_server.fetch(e_id, '(RFC822)')
-			perf = HeaderParser().parsestr(data[0][1])
-			subjects_list.append(perf['Subject'])
+	# def get_subjects(self, email_ids):
+	# 	subjects_list = []
+	# 	for e_id in email_ids[0].split():
+	# 		resp, data = self.imap_server.fetch(e_id, '(RFC822)')
+	# 		perf = HeaderParser().parsestr(data[0][1])
+	# 		subjects_list.append(perf['Subject'])
 
-		return subjects_list
+	# 	return subjects_list
 
 	def voice_command(self, mail_list):
 		for mail in mail_list:
@@ -484,12 +484,12 @@ class Bartender(MenuDelegate):
 		# main loop
 		try:  
 			while True:
-				self.imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
-				self.imap_server.login(USERNAME, PASSWORD)
-				self.imap_server.select('INBOX')
-				mail_list = self.check_email()
-				if mail_list and not self.running:
-					self.voice_command(mail_list)
+				# self.imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
+				# self.imap_server.login(USERNAME, PASSWORD)
+				# self.imap_server.select('INBOX')
+				# mail_list = self.check_email()
+				# if mail_list and not self.running:
+				# 	self.voice_command(mail_list)
 				time.sleep(0.1)
 		  
 		except KeyboardInterrupt:  
