@@ -501,9 +501,9 @@ class Bartender(MenuDelegate):
 		traceback.print_exc()
 
 
-bartender = Bartender()
-bartender.buildMenu()
-bartender.run()
+# bartender = Bartender()
+# bartender.buildMenu()
+# bartender.run()
 
 
 

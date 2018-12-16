@@ -2,6 +2,7 @@ from flask import Flask, json, render_template, request
 from bartender import Bartender
 
 import ast
+import threading
   
 app = Flask(__name__) 
   
@@ -39,6 +40,10 @@ if __name__ == '__main__':
 
     bartender = Bartender()
     bartender.buildMenu()
-    bartender.run()
+
+    # Run bartender using a thread
+    thread = threading.Thread(target=bartender.run)
+    thread.start()
+    thread.join()
 
     app.run(host='0.0.0.0') 
