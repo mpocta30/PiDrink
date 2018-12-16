@@ -493,7 +493,6 @@ class Bartender(MenuDelegate):
 				time.sleep(0.1)
 		  
 		except KeyboardInterrupt:  
-			print('Here')
 			GPIO.cleanup()       # clean up GPIO on CTRL+C exit 
 			sys.exit(0)
 			
