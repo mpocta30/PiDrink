@@ -1,5 +1,5 @@
 from flask import Flask, json, render_template, request
-#from bartender import Bartender
+from bartender import Bartender
 
 import ast
   
@@ -37,7 +37,7 @@ def change_pumps():
 # main driver function 
 if __name__ == '__main__': 
 
-    bartender = Bartender.Bartender()
+    bartender = Bartender()
     bartender.buildMenu()
     bartender.run()
 
