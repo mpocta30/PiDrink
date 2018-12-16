@@ -44,6 +44,12 @@ if __name__ == '__main__':
     # Run bartender using a thread
     thread = threading.Thread(target=bartender.run)
     thread.start()
-    thread.join()
 
     app.run(host='0.0.0.0') 
+
+    # Wait until thread finishes
+    thread.join()
+
+    # Clean exit
+    sys.exit(0)
+
