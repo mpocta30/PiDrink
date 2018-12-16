@@ -31,8 +31,8 @@ class Menu(MenuItem):
 	def nextSelection(self):
 		self.selectedOption = (self.selectedOption + 1) % len(self.options)
 
-        def prevSelection(self):
-                self.selectedOption = (self.selectedOption - 1) % len(self.options)
+	def prevSelection(self):
+		self.selectedOption = (self.selectedOption - 1) % len(self.options)
 
 	def getSelection(self):
 		return self.options[self.selectedOption]
