@@ -39,18 +39,20 @@ def change_pumps():
 # main driver function 
 if __name__ == '__main__': 
 
-    bartender = Bartender()
-    bartender.buildMenu()
+    try: 
+        bartender = Bartender()
+        bartender.buildMenu()
 
-    # Run bartender using a thread
-    thread = threading.Thread(target=bartender.run)
-    thread.start()
+        # Run bartender using a thread
+        thread = threading.Thread(target=bartender.run)
+        thread.start()
 
-    app.run(host='0.0.0.0') 
+        app.run(host='0.0.0.0') 
 
-    # Wait until thread finishes
+    except KeyboardInterrupt: 
+        # Clean exit
+        sys.exit(0)
+
     thread.join()
-
-    # Clean exit
     sys.exit(0)
 
