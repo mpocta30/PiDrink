@@ -1,6 +1,6 @@
 // Hide html elements before page loads
 $('#cover').hide();
-$('#loading').hide();
+$('.loading').hide();
 
 // Add drinks to selection list based on current ingredients
 $( document ).ready(function() {
@@ -114,7 +114,7 @@ $( document ).ready(function() {
 
         // Show loading gif
         $('#cover').show();
-        $('#loading').show();
+        $('.loading').show();
 
         // Send value of select tag
         $.ajax({
@@ -128,7 +128,7 @@ $( document ).ready(function() {
                 setTimeout(function(){
                     // Hide loading gif
                     $('#cover').hide();
-                    $('#loading').hide();
+                    $('.loading').hide();
                     $(':button').prop('disabled', false);
                     alert("Enjoy your drink!");
                 }, waitTime*1000);
