@@ -23,7 +23,9 @@ def make_drink():
     thread = threading.Thread(target=bartender.makeDrink, args=(drink, ingredients,))
     thread.start()
 
-    return makeTime
+
+
+    return jsonify(data=makeTime, status=200)
 
 
 # API to for user to make a drink
