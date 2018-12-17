@@ -122,7 +122,7 @@ $( document ).ready(function() {
             json[this.name] = this.value || '';
         });
     
-        alert(json);
+        alert(json.name);
 
         // Send form values
         $.ajax({
