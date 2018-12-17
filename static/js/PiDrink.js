@@ -101,6 +101,11 @@ $( document ).ready(function() {
         // Prevent page refresh
         e.preventDefault();
 
+        // User confirmation
+        if (!confirm("Are you sure you want this drink?")) {
+            return;
+        }
+
         // Disable all buttons
         $(':button').prop('disabled', true);
 
@@ -114,7 +119,7 @@ $( document ).ready(function() {
             success: function(data) {
                 waitTime = data.time;
                 setTimeout(function(){
-                    alert("Done");
+                    alert("Enjoy your drink!");
                     $(':button').prop('disabled', false);
                 }, waitTime*1000);
             }
@@ -126,6 +131,11 @@ $( document ).ready(function() {
     $('#createdrink').submit(function(e) {
         // Prevent page refresh
         e.preventDefault();
+
+        // User confirmation
+        if (!confirm("Are you sure you want to create this drink?")) {
+            return;
+        }
 
         // Get the form data
         var array = $(this).serializeArray();
@@ -147,6 +157,9 @@ $( document ).ready(function() {
             type: 'POST',
             data: {
                 drink_values: JSON.stringify(json),
+            },
+            success: function() {
+                alert('You have successfully created ' + json['name'] + '!')
             }
         });
     });
@@ -205,6 +218,11 @@ $( document ).ready(function() {
         // Prevent page refresh
         e.preventDefault();
 
+        // User confirmation
+        if (!confirm("Are you sure you want to make this changes?")) {
+            return;
+        }
+
         // Create list of new pump values
         var pump_values = [];
         for(var i = 1; i < 7; i++) {
@@ -217,7 +235,10 @@ $( document ).ready(function() {
             type: 'POST',
             data: {
                 pumps: JSON.stringify(pump_values)
-            },   
+            },  
+            success: function() {
+                alert('Your changes are saved.')
+            } 
         });
     });
 });
