@@ -132,6 +132,7 @@ $( document ).ready(function() {
             },
             error: function() {
                 $('.load').hide();
+                $(':button').prop('disabled', false);
                 alert("There is currently a drink being made, please check back later.");
             }
         });
