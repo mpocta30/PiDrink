@@ -129,6 +129,9 @@ $( document ).ready(function() {
                     $(':button').prop('disabled', false);
                     alert("Enjoy your drink!");
                 }, waitTime*1000);
+            },
+            error: function(data) {
+                alert(data.message);
             }
         });
     });
