@@ -121,6 +121,7 @@ $( document ).ready(function() {
                 setTimeout(function(){
                     alert("Enjoy your drink!");
                     $(':button').prop('disabled', false);
+                    location.reload();
                 }, waitTime*1000);
             }
         });
@@ -147,7 +148,7 @@ $( document ).ready(function() {
 
         // Check if drink already exists
         if(drink_names.includes(json['name'].toLowerCase())){
-            alert("This drink alreay exists.")
+            alert("This drink alreay exists.");
             return;
         }
 
@@ -159,7 +160,8 @@ $( document ).ready(function() {
                 drink_values: JSON.stringify(json),
             },
             success: function() {
-                alert('You have successfully created ' + json['name'] + '!')
+                alert('You have successfully created ' + json['name'] + '!');
+                location.reload();
             }
         });
     });
@@ -237,7 +239,8 @@ $( document ).ready(function() {
                 pumps: JSON.stringify(pump_values)
             },  
             success: function() {
-                alert('Your changes are saved.')
+                alert('Your changes are saved.');
+                location.reload();
             } 
         });
     });
