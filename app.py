@@ -18,7 +18,8 @@ def home():
 def make_drink(): 
     drink = request.form['drink_choice']
     
-    bartender.makeDrink(drink, "")
+    thread = threading.Thread(target=bartender.makeDrink, args=(drink, "",))
+    thread.start()
 
     return ('', 200)
 
@@ -45,8 +46,8 @@ if __name__ == '__main__':
         bartender.buildMenu()
 
         # Run bartender using a thread
-        thread = threading.Thread(target=bartender.run)
-        thread.start()
+        thread1 = threading.Thread(target=bartender.run)
+        thread1.start()
 
         app.run(host='0.0.0.0') 
 
@@ -54,6 +55,6 @@ if __name__ == '__main__':
         # Clean exit
         sys.exit(0)
 
-    thread.join()
+    thread1.join()
     sys.exit(0)
 
