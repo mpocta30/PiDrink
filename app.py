@@ -5,6 +5,7 @@ from pprint import pprint
 import ast
 import threading
 import sys
+import RPi.GPIO as GPIO
   
 app = Flask(__name__) 
   
@@ -116,6 +117,7 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt: 
         # Clean exit
+        GPIO.cleanup()
         sys.exit(0)
 
     thread1.join()
