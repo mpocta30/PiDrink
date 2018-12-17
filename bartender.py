@@ -415,8 +415,8 @@ class Bartender(MenuDelegate):
 					pumpProcesses.append(pump_p)
 
                 
-                disp_process = Process(target=self.progressBar, args=(maxTime,))
-                pumpProcesses.append(disp_process) 
+		disp_process = Process(target=self.progressBar, args=(maxTime,))
+		pumpProcesses.append(disp_process) 
 
                 # start the pump threads
 		for process in pumpProcesses:
