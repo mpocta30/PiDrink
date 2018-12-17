@@ -389,18 +389,6 @@ class Bartender(MenuDelegate):
                # self.disp.display()
 
 	def makeDrink(self, drink, ingredients):
-		# Get ingredients if send from web app
-		if ingredients == "":
-			found = False
-			while(found == False):
-				currmen = self.menuContext.currentMenu.getSelection()
-				if(currmen.name == drink):
-					ingredients = currmen.attributes["ingredients"]
-					self.make_drink = False
-					found = True
-				else:
-					self.menuContext.currentMenu.nextSelection()
-
 		# cancel any button presses while the drink is being made
 		# self.stopInterrupts()
 		print('Making a ' + drink)
@@ -472,6 +460,30 @@ class Bartender(MenuDelegate):
 				self.menuContext.retreat()
 			else:
 				self.menuContext.advance()
+
+	def get_ingredients_time(self, drink):
+		# Get the ingredients for the specified drink
+		found = False
+		while(found == False):
+			currmen = self.menuContext.currentMenu.getSelection()
+			if(currmen.name == drink):
+				ingredients = currmen.attributes["ingredients"]
+				self.make_drink = False
+				found = True
+			else:
+				self.menuContext.currentMenu.nextSelection()
+
+		# Get the drink making time
+		for ing in ingredients.keys():
+			for pump in self.pump_configuration.keys():
+				if ing == self.pump_configuration[pump]["value"]:
+					waitTime = ingredients[ing] * FLOW_RATE
+					if (waitTime > maxTime):
+						maxTime = waitTime
+
+		# Return making time and ingredients for drink
+		return ingredients, maxTime
+
 
 	def updateProgressBar(self, percent, x=15, y=10):
 	   

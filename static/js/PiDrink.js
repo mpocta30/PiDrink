@@ -89,13 +89,19 @@ $( document ).ready(function() {
         // Prevent page refresh
         e.preventDefault();
 
+        // Disable all buttons
+        //$(':button').prop('disabled', true);
+
         // Send value of select tag
         $.ajax({
             url: '/makedrink',
             type: 'POST',
             data: {
                 drink_choice: $('#drink').val(),
-            }   
+            },
+            success: function(data) {
+                alert(data);
+            }
         });
     });
 
@@ -109,10 +115,10 @@ $( document ).ready(function() {
         // Add to ingredient count
         ingredient_count++;
 
-        $('#ingredient_list').append('<div class="row" id="div'+ingredient_count+'"><div class="col-sm-4"><div class="input-group mb-3">\
+        $('#ingredient_list').append('<div class="row" id="div'+ingredient_count+'"><div class="col-sm-6"><div class="input-group mb-3">\
             <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Ingredient</span>\
             </div><input type="text" class="form-control" id="ingredient'+ingredient_count+'" placeholder="Ex: Orange Juice">\
-            </div></div><div class="col-sm-4"><div class="input-group mb-3">\<div class="input-group-prepend">\
+            </div></div><div class="col-sm-6"><div class="input-group mb-3">\<div class="input-group-prepend">\
             <span class="input-group-text" id="basic-addon1">Fluid Ounces</span></div><input type="text"\
             class="form-control" id="amount'+ingredient_count+'" placeholder="Ex: 100"></div></div></div></div>');
     });

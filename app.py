@@ -17,11 +17,13 @@ def home():
 @app.route('/makedrink', methods=['POST']) 
 def make_drink(): 
     drink = request.form['drink_choice']
+
+    ingredients, makeTime = bartender.get_ingredients_time(drink)
     
-    thread = threading.Thread(target=bartender.makeDrink, args=(drink, "",))
+    thread = threading.Thread(target=bartender.makeDrink, args=(drink, ingredients,))
     thread.start()
 
-    return ('', 200)
+    return makeTime
 
 
 # API to for user to make a drink
