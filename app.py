@@ -20,7 +20,7 @@ def make_drink():
     # Make sure a drink isn't already being made
     if bartender.running:
         return jsonify(message="A drink is currently being made,\
-                            come back later.", 404)
+                            come back later.", status=404)
 
     # Get drink name
     drink = request.form['drink_choice']
