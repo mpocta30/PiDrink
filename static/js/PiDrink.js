@@ -130,9 +130,10 @@ $( document ).ready(function() {
                     alert("Enjoy your drink!");
                 }, waitTime*1000);
             },
-            error: function(request, error) {
+            error: function() {
                 $('.load').hide();
-                alert(request["message"]);
+                alert("There is already a drink being made, check back\
+                      again later.");
             }
         });
     });
