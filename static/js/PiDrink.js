@@ -115,6 +115,15 @@ $( document ).ready(function() {
         // Prevent page refresh
         e.preventDefault();
 
+        var array = $(this).serializeArray();
+        var json = {};
+        
+        jQuery.each(array, function() {
+            json[this.name] = this.value || '';
+        });
+    
+        alert(json);
+
         // Send form values
         $.ajax({
             url: '/createdrink',
