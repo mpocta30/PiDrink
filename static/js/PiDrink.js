@@ -5,6 +5,10 @@ $( document ).ready(function() {
         async: false
     });
 
+    // Hide css elements
+    $('#cover').css("visibility", "visible");
+    $('#loading').css("visibility", "visible");
+
 
     // Create list of ingredients
     var ingredients = [];
@@ -113,7 +117,7 @@ $( document ).ready(function() {
         if($( '#cover' ).not(":visible")){
             alert('Hidden');
         }
-        $('#cover').css("visibility", "hidden");
+        $('#cover').css("visibility", "visible");
         if($( '#cover' ).is(":visible")){
             alert('Showing');
         }
