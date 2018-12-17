@@ -370,7 +370,7 @@ class Bartender(MenuDelegate):
 		interval = waitTime / 100.
 		
 		# Clear the display
-		self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
+		self.draw.rectangle((0,0,self.screen_width, self.screen_height),outline=0,fill=0)
 		self.disp.image(self.image)
 		self.disp.display()
         
@@ -424,9 +424,6 @@ class Bartender(MenuDelegate):
                 # start the pump threads
 		for process in pumpProcesses:
 			process.start()
-
-		# start display
-		self.progressBar(maxTime)
 
 		# wait for threads to finish
 		for process in pumpProcesses:
