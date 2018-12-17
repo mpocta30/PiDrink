@@ -114,6 +114,9 @@ $( document ).ready(function() {
             alert('Hidden');
         }
         $('#cover').show();
+        if($( '#cover' ).is(":visible")){
+            alert('Showing');
+        }
         $('#loading').show();
 
         // Send value of select tag
