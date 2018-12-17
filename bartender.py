@@ -1,5 +1,3 @@
-import gaugette.platform
-import gaugette.gpio
 import os
 import time
 import sys
@@ -103,7 +101,6 @@ class Bartender(MenuDelegate):
 		self.draw = ImageDraw.Draw(self.image)
 		self.draw.rectangle((0,0,SCREEN_WIDTH,SCREEN_HEIGHT), outline=0, fill=0)
 		self.font = ImageFont.load_default()
-		gpio = gaugette.gpio.GPIO()
 
 		# Very important... This lets py-gaugette 'know' what pins to use in order to reset the display
  		# Change rows & cols values depending on your display dimensions.
@@ -377,7 +374,7 @@ class Bartender(MenuDelegate):
 		#Clear display
 			self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
 			self.updateProgressBar(x, y=10)
-			#self.disp.image(self.image)
+			self.disp.image(self.image)
 			self.disp.display()
 			time.sleep(interval)
 			self.disp.clear()
@@ -504,8 +501,8 @@ class Bartender(MenuDelegate):
 				p_loc = int(p/100.0*width)
 				self.draw.point((x + p_loc, h + y),fill=255)
 				self.draw.text((55,20), str(percent) + '%', font = self.font, fill=255)
-                #self.disp.image(self.image)
-	        #self.disp.display()
+                self.disp.image(self.image)
+			self.disp.display()
 
 	def run(self):
 		self.startInterrupts()
