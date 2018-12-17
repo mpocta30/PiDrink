@@ -1,4 +1,4 @@
-from flask import Flask, json, render_template, request
+from flask import Flask, json, render_template, request, jsonify
 from bartender import Bartender
 
 import ast
