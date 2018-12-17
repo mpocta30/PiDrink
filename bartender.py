@@ -374,7 +374,7 @@ class Bartender(MenuDelegate):
 		#Clear display
 			self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
 			#self.updateProgressBar(x, y=10)
-			self.draw.text((55,20), str(percent) + '%', font = self.font, fill=255)
+			self.draw.text((55,20), str(x) + '%', font = self.font, fill=255)
 			self.disp.image(self.image)
 			self.disp.display()
 			time.sleep(interval)
