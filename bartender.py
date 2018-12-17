@@ -284,7 +284,7 @@ class Bartender(MenuDelegate):
 	def changeConfiguration(self, pumps):
 		# Change configuration of every pump
 		for i in range(1, 7):
-			self.pump_configuration["pump_"+i]["value"] = pumps[i-1]
+			self.pump_configuration["pump_"+str(i)]["value"] = pumps[i-1]
 
 		Bartender.writePumpConfiguration(self.pump_configuration)
 
