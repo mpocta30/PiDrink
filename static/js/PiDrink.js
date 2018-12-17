@@ -111,7 +111,7 @@ $( document ).ready(function() {
 
 
     // PUT request for user to make a new drink
-    $('createdrink').submit(function(e) {
+    $('#createdrink').submit(function(e) {
         // Prevent page refresh
         e.preventDefault();
 
