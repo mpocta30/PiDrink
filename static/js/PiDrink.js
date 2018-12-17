@@ -121,7 +121,6 @@ $( document ).ready(function() {
                 setTimeout(function(){
                     alert("Enjoy your drink!");
                     $(':button').prop('disabled', false);
-                    location.reload();
                 }, waitTime*1000);
             }
         });
@@ -161,7 +160,6 @@ $( document ).ready(function() {
             },
             success: function() {
                 alert('You have successfully created ' + json['name'] + '!');
-                location.reload();
             }
         });
     });
@@ -240,7 +238,6 @@ $( document ).ready(function() {
             },  
             success: function() {
                 alert('Your changes are saved.');
-                location.reload();
             } 
         });
     });
