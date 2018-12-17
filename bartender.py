@@ -366,7 +366,7 @@ class Bartender(MenuDelegate):
 	def progressBar(self, waitTime):
 		interval = waitTime / 86.
         
-		for x in range(1, 101):		
+		for x in range(1, 116.3):		
 			# Clear display
 			self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
 			self.draw.text((55,20), str(x) + '%', font = self.font, fill=255)
