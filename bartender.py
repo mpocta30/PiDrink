@@ -26,7 +26,6 @@ from subprocess import call
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
-from multiprocessing import Process
 #from dotstar import Adafruit_DotStar
 from menu import MenuItem, Menu, Back, MenuContext, MenuDelegate
 
@@ -294,10 +293,10 @@ class Bartender(MenuDelegate):
 		self.running = True
 
 		for pump in self.pump_configuration.keys():
-			pump_p = Process(target=self.pour, args=(self.pump_configuration[pump]["pin"], waitTime))
+			pump_p = threading.Thread(target=self.pour, args=(self.pump_configuration[pump]["pin"], waitTime,))
 			pumpProcesses.append(pump_p)
 
-		disp_process = Process(target=self.progressBar, args=(waitTime,))
+		disp_process = threading.Thread(target=self.progressBar, args=(waitTime,))
 		pumpProcesses.append(disp_process) 
 
 		# start the pump threads
@@ -409,11 +408,11 @@ class Bartender(MenuDelegate):
 					waitTime = ingredients[ing] * FLOW_RATE
 					if (waitTime > maxTime):
 						maxTime = waitTime
-					pump_p = Process(target=self.pour, args=(self.pump_configuration[pump]["pin"], waitTime))
+					pump_p = threading.Thread(target=self.pour, args=(self.pump_configuration[pump]["pin"], waitTime))
 					pumpProcesses.append(pump_p)
 
                 
-		disp_process = Process(target=self.progressBar, args=(maxTime,))
+		disp_process = threading.Thread(target=self.progressBar, args=(maxTime,))
 		pumpProcesses.append(disp_process) 
 
                 # start the pump threads
