@@ -132,7 +132,7 @@ $( document ).ready(function() {
             },
             error: function(request, error) {
                 $('.load').hide();
-                alert(request.message);
+                alert(request);
             }
         });
     });
