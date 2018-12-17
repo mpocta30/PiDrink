@@ -109,16 +109,16 @@ class Bartender(MenuDelegate):
  		# Change rows & cols values depending on your display dimensions.
 
 		# load the pump configuration from file
-		self.pump_configuration = Bartender.readJson('pump_config.json')
+		self.pump_configuration = Bartender.readJson('static/json/pump_config.json')
 		for pump in self.pump_configuration.keys():
 			GPIO.setup(self.pump_configuration[pump]["pin"], GPIO.OUT, initial=GPIO.HIGH)
 
 		# load the current drink list
-		self.drink_list = Bartender.readJson('drink_list.json')
+		self.drink_list = Bartender.readJson('static/json/drink_list.json')
 		self.drink_list = self.drink_list["drink_list"]
 
 		# load the current drink options
-		self.drink_options = Bartender.readJson('drink_options.json')
+		self.drink_options = Bartender.readJson('static/json/drink_options.json')
 		self.drink_options = self.drink_options["drink_options"]
 
 		# setup pixels:
@@ -176,7 +176,7 @@ class Bartender(MenuDelegate):
 
 	@staticmethod
 	def writePumpConfiguration(configuration):
-		with open("pump_config.json", "w") as jsonFile:
+		with open("static/json/pump_config.json", "w") as jsonFile:
 			json.dump(configuration, jsonFile)
 
 	def startInterrupts(self):
