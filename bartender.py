@@ -501,7 +501,7 @@ class Bartender(MenuDelegate):
 				p_loc = int(p/100.0*width)
 				self.draw.point((x + p_loc, h + y),fill=255)
 				self.draw.text((55,20), str(percent) + '%', font = self.font, fill=255)
-                self.disp.image(self.image)
+				self.disp.image(self.image)
 			self.disp.display()
 
 	def run(self):
