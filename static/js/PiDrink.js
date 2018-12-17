@@ -100,7 +100,7 @@ $( document ).ready(function() {
                 drink_choice: $('#drink').val(),
             },
             success: function(data) {
-                alert(data);
+                alert(data.time);
             }
         });
     });

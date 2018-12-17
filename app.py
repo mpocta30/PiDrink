@@ -25,7 +25,7 @@ def make_drink():
 
 
 
-    return jsonify(data=makeTime, status=200)
+    return jsonify(time=makeTime, status=200)
 
 
 # API to for user to make a drink
