@@ -378,7 +378,7 @@ class Bartender(MenuDelegate):
 			self.disp.display()
 			time.sleep(interval)
 			self.disp.clear()
-			#self.disp.display()
+			self.disp.display()
 
                # self.image = Image.open('happycat_oled_32.ppm').convert('1')
 
