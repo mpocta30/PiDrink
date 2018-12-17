@@ -132,7 +132,7 @@ $( document ).ready(function() {
         // Prevent page refresh
         e.preventDefault();
 
-        if(ingredient_count === 6) {
+        if(ingredient_count === 5) {
             alert('No more than 6 ingredients are allowed.');
             return;
         }
