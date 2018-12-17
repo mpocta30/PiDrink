@@ -131,6 +131,7 @@ $( document ).ready(function() {
                 }, waitTime*1000);
             },
             error: function(data) {
+                $('.load').hide();
                 alert(data.message);
             }
         });
