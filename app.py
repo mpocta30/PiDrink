@@ -7,9 +7,6 @@ import threading
 import sys
   
 app = Flask(__name__) 
-
-# Variable to tell if a drink is already being made
-making = False
   
 # Returns home html template
 @app.route('/') 
@@ -20,14 +17,6 @@ def home():
 # API to for user to make a drink
 @app.route('/makedrink', methods=['POST']) 
 def make_drink(): 
-    global making
-    
-    if making:
-        return jsonify(message="There is already a drink being made.", status=503)
-
-    # Drink currently being made
-    making = True
-
     # Get drink name
     drink = request.form['drink_choice']
 
@@ -36,9 +25,6 @@ def make_drink():
     # Making drink
     thread = threading.Thread(target=bartender.makeDrink, args=(drink, ingredients,))
     thread.start()
-
-    # Drink is finished being made
-    making = False
 
     #return jsonify(time=makeTime, status=200)
     return jsonify(time=makeTime, status=200)

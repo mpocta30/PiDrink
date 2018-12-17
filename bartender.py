@@ -389,6 +389,9 @@ class Bartender(MenuDelegate):
                # self.disp.display()
 
 	def makeDrink(self, drink, ingredients):
+		if self.running:
+			return
+			
 		# cancel any button presses while the drink is being made
 		# self.stopInterrupts()
 		print('Making a ' + drink)
