@@ -6,8 +6,8 @@ $( document ).ready(function() {
     });
 
     // Hide css elements
-    $('#cover').css("visibility", "visible");
-    $('#loading').css("visibility", "visible");
+    $('#cover').hide();
+    $('#loading').hide();
 
 
     // Create list of ingredients
