@@ -370,8 +370,7 @@ class Bartender(MenuDelegate):
 		interval = waitTime / 100.
 		
 		# Clear the display
-		self.disp.clear()
-		self.disp.display()
+		self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
         
 		for x in range(1, 101):
 			
