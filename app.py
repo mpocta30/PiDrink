@@ -16,7 +16,12 @@ def home():
 
 # API to for user to make a drink
 @app.route('/makedrink', methods=['POST']) 
-def make_drink(): 
+def make_drink():
+    # Make sure a drink isn't already being made
+    if bartender.running:
+        return jsonify(message="A drink is currently being made,\
+                            come back later.", status=503)
+
     # Get drink name
     drink = request.form['drink_choice']
 
@@ -26,7 +31,6 @@ def make_drink():
     thread = threading.Thread(target=bartender.makeDrink, args=(drink, ingredients,))
     thread.start()
 
-    #return jsonify(time=makeTime, status=200)
     return jsonify(time=makeTime, status=200)
 
 
