@@ -109,6 +109,10 @@ $( document ).ready(function() {
         // Disable all buttons
         $(':button').prop('disabled', true);
 
+        // Show loading gif
+        $('#cover').show();
+        $('#loading').show();
+
         // Send value of select tag
         $.ajax({
             url: '/makedrink',
@@ -119,8 +123,11 @@ $( document ).ready(function() {
             success: function(data) {
                 waitTime = data.time;
                 setTimeout(function(){
-                    alert("Enjoy your drink!");
+                    // Hide loading gif
+                    $('#cover').hide();
+                    $('#loading').hide();
                     $(':button').prop('disabled', false);
+                    alert("Enjoy your drink!");
                 }, waitTime*1000);
             }
         });
