@@ -389,6 +389,18 @@ class Bartender(MenuDelegate):
                # self.disp.display()
 
 	def makeDrink(self, drink, ingredients):
+		# Get ingredients if send from web app
+		if ingredients == "":
+			found = False
+			while(found == False):
+				currmen = self.menuContext.currentMenu.getSelection()
+				if(currmen.name == drink):
+					ingredients = currmen.attributes["ingredients"]
+					self.make_drink = False
+					found = True
+				else:
+					self.menuContext.currentMenu.nextSelection()
+
 		# cancel any button presses while the drink is being made
 		# self.stopInterrupts()
 		print('Making a ' + drink)

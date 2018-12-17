@@ -17,7 +17,8 @@ def home():
 @app.route('/makedrink', methods=['POST']) 
 def make_drink(): 
     drink = request.form['drink_choice']
-    print(drink)
+    
+    bartender.makeDrink(drink, "")
 
     return ('', 200)
 
