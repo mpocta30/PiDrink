@@ -23,13 +23,20 @@ def make_drink():
     if making:
         return jsonify(message="There is already a drink being made.", status=503)
 
+    # Drink currently being made
+    making = True
+
+    # Get drink name
     drink = request.form['drink_choice']
 
     ingredients, makeTime = bartender.get_ingredients_time(drink)
     
+    # Making drink
     thread = threading.Thread(target=bartender.makeDrink, args=(drink, ingredients,))
     thread.start()
 
+    # Drink is finished being made
+    making = False
 
     #return jsonify(time=makeTime, status=200)
     return jsonify(time=makeTime, status=200)
