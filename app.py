@@ -45,11 +45,11 @@ def change_pumps():
 @app.route('/createdrink', methods=['POST']) 
 def create_drink(): 
 
-    pumps = request.form['pumps']
-    pumps = ast.literal_eval(pumps)
+    pumps = request.form['drink_values']
+    print(pumps)
 
     # Change pump configuration
-    bartender.changeConfiguration(pumps)
+    #bartender.changeConfiguration(pumps)
 
     return ('', 200)
     

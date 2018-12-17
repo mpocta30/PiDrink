@@ -115,7 +115,14 @@ $( document ).ready(function() {
         // Prevent page refresh
         e.preventDefault();
 
-        alert($('#createdrink').serialize());
+        // Send form values
+        $.ajax({
+            url: '/createdrink',
+            type: 'POST',
+            data: {
+                drink_values: $(this).serialize(),
+            }
+        });
     });
 
     
@@ -124,6 +131,11 @@ $( document ).ready(function() {
     $('#add_ingredient').click(function(e) {
         // Prevent page refresh
         e.preventDefault();
+
+        if(ingredient_count === 6) {
+            alert('No more than 6 ingredients are allowed.');
+            return;
+        }
 
         // Add to ingredient count
         ingredient_count++;
