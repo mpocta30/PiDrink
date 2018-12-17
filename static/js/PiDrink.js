@@ -7,7 +7,8 @@ $( document ).ready(function() {
 
     // Hide html elements
     $('#cover').hide();
-    $('.loading').hide();
+    $('#loading').hide();
+    $('#title').hide();
 
     // Create list of ingredients
     var ingredients = [];
@@ -114,7 +115,8 @@ $( document ).ready(function() {
 
         // Show loading gif
         $('#cover').show();
-        $('.loading').show();
+        $('#loading').show();
+        $('#title').show();
 
         // Send value of select tag
         $.ajax({
@@ -128,7 +130,8 @@ $( document ).ready(function() {
                 setTimeout(function(){
                     // Hide loading gif
                     $('#cover').hide();
-                    $('.loading').hide();
+                    $('#loading').hide();
+                    $('#title').hide();
                     $(':button').prop('disabled', false);
                     alert("Enjoy your drink!");
                 }, waitTime*1000);
