@@ -113,7 +113,7 @@ $( document ).ready(function() {
         if($( '#cover' ).not(":visible")){
             alert('Hidden');
         }
-        $('#cover').visible(true);
+        $('#cover').css("visibility", "hidden");
         if($( '#cover' ).is(":visible")){
             alert('Showing');
         }
