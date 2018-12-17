@@ -109,6 +109,15 @@ $( document ).ready(function() {
         });
     });
 
+
+    // PUT request for user to make a new drink
+    $('createdrink').submit(function(e) {
+        // Prevent page refresh
+        e.preventDefault();
+
+        console.log( $( this ).serialize() );
+    });
+
     
     // Add new ingredient div
     var ingredient_count = 0;

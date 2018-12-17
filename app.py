@@ -34,7 +34,19 @@ def change_pumps():
 
     pumps = request.form['pumps']
     pumps = ast.literal_eval(pumps)
-    print(pumps)
+
+    # Change pump configuration
+    bartender.changeConfiguration(pumps)
+
+    return ('', 200)
+
+
+# API to for user to create a new drink
+@app.route('/createdrink', methods=['POST']) 
+def create_drink(): 
+
+    pumps = request.form['pumps']
+    pumps = ast.literal_eval(pumps)
 
     # Change pump configuration
     bartender.changeConfiguration(pumps)
