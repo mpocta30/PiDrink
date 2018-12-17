@@ -51,7 +51,7 @@ def create_drink():
         if 'ingredient' in key:
             ingredients.append(drink_values[key])
         elif 'amount' in key:
-            amounts.append(drink_values[key])
+            amounts.append(int(drink_values[key]))
 
     # Create ingredient JSON
     for i, name in enumerate(ingredients):
