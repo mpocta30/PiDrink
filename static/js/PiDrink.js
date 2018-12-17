@@ -115,7 +115,7 @@ $( document ).ready(function() {
         // Prevent page refresh
         e.preventDefault();
 
-        console.log( $( this ).serialize() );
+        alert( $( this ).serialize() );
     });
 
     
