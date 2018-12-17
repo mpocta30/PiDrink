@@ -19,8 +19,8 @@ def home():
 def make_drink():
     # Make sure a drink isn't already being made
     if bartender.running:
-        return jsonify(error="There is already a drink being made\
-                        , check back again later."), 503
+        return "There is already a drink being made\
+                        , check back again later.", 503
 
     # Get drink name
     drink = request.form['drink_choice']
