@@ -98,7 +98,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">Name</span>
                                 </div>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Ex: Gin & Juice">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Ex: Gin & Juice" required>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -111,7 +111,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">Ingredient</span>
                                 </div>
-                                <input type="text" class="form-control" id="ingredient0" name="ingredient0" placeholder="Ex: Orange Juice">
+                                <select class="form-control text-center" id="ingredient0" name="ingredient0" required>
+                                    <option value="" selected disabled>--Ingredient--</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -119,7 +121,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">Fluid Ounces</span>
                                 </div>
-                                <input type="text" class="form-control" id="amount0" name="amount0" placeholder="Ex: 100">
+                                <input type="text" class="form-control" id="amount0" name="amount0" placeholder="Ex: 100" required>
                             </div>
                         </div>
                     </div>

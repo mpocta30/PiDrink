@@ -26,6 +26,8 @@ $( document ).ready(function() {
     var option_names = [];
     var option_values = [];
     var pump_names = [];
+    var drink_names = [];
+    
     $.getJSON("static/json/drink_options.json", function(json) {
         var option_list = json.drink_options.sort();
         for(var i = 0; i < option_list.length; i++) {
@@ -50,7 +52,11 @@ $( document ).ready(function() {
 
         $.each(json.drink_list, function(index, value) {
             drink_ings = Object.keys(value.ingredients);
+
+            // Get names of all current drinks
+            drink_names.push(value.name.toString().toLowerCase());
             
+            // Check if drinks can be made
             for(var i = 0; i < drink_ings.length; i++) {
                 if(ingredients.includes(drink_ings[i])) {
                     exists = true;
@@ -81,6 +87,12 @@ $( document ).ready(function() {
     // Show current value of pumps
     for(var i = 0; i < pumps.length; i++) {
         $("#pump"+(i+1)+" > [value=" + pumps[i] + "]").attr("selected", "true");
+    }
+
+
+    // Set all ingredient options for new drink
+    for(var i = 0; i < option_names.length; i++) {
+        $('#ingredient0').append('<option value="'+option_values[i]+'">'+option_names[i]+'</option>');
     }
 
 
@@ -115,21 +127,26 @@ $( document ).ready(function() {
         // Prevent page refresh
         e.preventDefault();
 
+        // Get the form data
         var array = $(this).serializeArray();
         var json = {};
         
         jQuery.each(array, function() {
             json[this.name] = this.value || '';
         });
-    
-        alert(json.name);
+
+        // Check if drink already exists
+        if(drink_names.includes(json['name'].toLowerCase())){
+            alert("This drink alreay exists.")
+            return;
+        }
 
         // Send form values
         $.ajax({
             url: '/createdrink',
             type: 'POST',
             data: {
-                drink_values: $(this).serialize(),
+                drink_values: JSON.stringify(json),
             }
         });
     });
@@ -151,10 +168,17 @@ $( document ).ready(function() {
 
         $('#ingredient_list').append('<div class="row" id="div'+ingredient_count+'"><div class="col-sm-6"><div class="input-group mb-3">\
             <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Ingredient</span>\
-            </div><input type="text" class="form-control" id="ingredient'+ingredient_count+'" placeholder="Ex: Orange Juice">\
+            </div><select class="form-control text-center" id="ingredient'+ingredient_count+'" name="ingredient'+ingredient_count+'"\
+            required><option value="" selecteddisabled>--Ingredient--</option></select>\
             </div></div><div class="col-sm-6"><div class="input-group mb-3">\<div class="input-group-prepend">\
             <span class="input-group-text" id="basic-addon1">Fluid Ounces</span></div><input type="text"\
-            class="form-control" id="amount'+ingredient_count+'" placeholder="Ex: 100"></div></div></div></div>');
+            class="form-control" id="amount'+ingredient_count+'" name="amount'+ingredient_count+'" placeholder="Ex: 100" required>\
+            </div></div></div></div>');
+
+        // Set all ingredient options for new drink
+        for(var i = 0; i < option_names.length; i++) {
+            $('#ingredient'+ingredient_count).append('<option value="'+option_values[i]+'">'+option_names[i]+'</option>');
+        }
     });
 
 

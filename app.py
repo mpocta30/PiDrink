@@ -1,5 +1,6 @@
 from flask import Flask, json, render_template, request, jsonify
-from bartender import Bartender
+#from bartender import Bartender
+from pprint import pprint
 
 import ast
 import threading
@@ -24,8 +25,54 @@ def make_drink():
     thread.start()
 
 
-
+    #return jsonify(time=makeTime, status=200)
     return jsonify(time=makeTime, status=200)
+
+
+# API for the user to create a new drink
+@app.route('/createdrink', methods=['POST']) 
+def create_drink(): 
+    # Get all values for the drink
+    drink_values = request.form['drink_values']
+    drink_values = ast.literal_eval(drink_values)
+
+    # Setting the name of the new drink
+    drink_name = drink_values['name']
+
+    # Lists to store ingredient information
+    ingredients = []
+    amounts = []
+    ing = {}
+    new_drink = {}
+    drink_json = {}
+
+    # Decide which values mean what for new drink
+    for key in drink_values.keys():
+        if 'ingredient' in key:
+            ingredients.append(drink_values[key])
+        elif 'amount' in key:
+            amounts.append(drink_values[key])
+
+    # Create ingredient JSON
+    for i, name in enumerate(ingredients):
+        ing[name] = amounts[i]
+
+    # Create drink JSON object
+    new_drink['name'] = drink_name
+    new_drink['ingredients'] = ing
+
+    # Read JSON containing list of drinks
+    drink_list = json.load(open('static/json/drink_list.json'))
+    drink_list = drink_list['drink_list']
+
+    # Add new drink to drink list
+    drink_list.append(new_drink)
+    drink_json['drink_list'] = drink_list
+
+    with open("static/json/drink_list.json", "w") as jsonFile:
+        json.dump(drink_json, jsonFile)
+
+    return ('', 200)
 
 
 # API to for user to make a drink
@@ -41,18 +88,14 @@ def change_pumps():
     return ('', 200)
 
 
-# API to for user to create a new drink
-@app.route('/createdrink', methods=['POST']) 
-def create_drink(): 
+# API to add a new ingredient
+@app.route('/addingredient', methods=['POST'])
+def add_ingredient():
+    # Get the information for the new ingredient
+    ingredient = request.form['ingredient']
 
-    pumps = request.form['drink_values']
-    print(pumps)
-
-    # Change pump configuration
-    #bartender.changeConfiguration(pumps)
-
+    print(ingredient)
     return ('', 200)
-    
   
 # main driver function 
 if __name__ == '__main__': 
