@@ -1,14 +1,13 @@
+// Hide html elements before page loads
+$('#cover').hide();
+$('#loading').hide();
+
 // Add drinks to selection list based on current ingredients
 $( document ).ready(function() {
     // Turn of async so functions finish
     $.ajaxSetup({
         async: false
     });
-
-    // Hide css elements
-    $('#cover').hide();
-    $('#loading').hide();
-
 
     // Create list of ingredients
     var ingredients = [];
@@ -114,13 +113,7 @@ $( document ).ready(function() {
         $(':button').prop('disabled', true);
 
         // Show loading gif
-        if($( '#cover' ).not(":visible")){
-            alert('Hidden');
-        }
         $('#cover').show();
-        if($( '#cover' ).is(":visible")){
-            alert('Showing');
-        }
         $('#loading').show();
 
         // Send value of select tag
