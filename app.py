@@ -20,6 +20,8 @@ def home():
 # API to for user to make a drink
 @app.route('/makedrink', methods=['POST']) 
 def make_drink(): 
+    global making
+    
     if making:
         return jsonify(message="There is already a drink being made.", status=503)
 
