@@ -1,4 +1,4 @@
-from flask import Flask, json, render_template, request, jsonify
+from flask import Flask, json, render_template, request, jsonify, abort
 from bartender import Bartender
 from pprint import pprint
 
@@ -19,8 +19,8 @@ def home():
 def make_drink():
     # Make sure a drink isn't already being made
     if bartender.running:
-        return jsonify(message="A drink is currently being made,\
-                            come back later.", status=503)
+        return {"message": "A drink is currently being made,\
+                            come back later."}, 404
 
     # Get drink name
     drink = request.form['drink_choice']
