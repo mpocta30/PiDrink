@@ -367,18 +367,24 @@ class Bartender(MenuDelegate):
 		GPIO.output(pin, GPIO.HIGH)
 
 	def progressBar(self, waitTime):
-		interval = waitTime / 100.0
+		interval = waitTime / 100.
+		
+		self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
+		self.draw.text((55,20), str(x) + '%', font = self.font, fill=255)
+		self.disp.image(self.image)
+		self.disp.display()
         
 		for x in range(1, 101):
-		#Clear display
-			self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
-			#self.updateProgressBar(x, y=10)
-			self.draw.text((55,20), str(x) + '%', font = self.font, fill=255)
-			self.disp.image(self.image)
-			self.disp.display()
+			
+		# #Clear display
+		# 	self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
+		# 	#self.updateProgressBar(x, y=10)
+		# 	self.draw.text((55,20), str(x) + '%', font = self.font, fill=255)
+		# 	self.disp.image(self.image)
+		# 	self.disp.display()
 			time.sleep(interval)
-			# self.disp.clear()
-			# self.disp.display()
+		# 	# self.disp.clear()
+		# 	# self.disp.display()
 
                # self.image = Image.open('happycat_oled_32.ppm').convert('1')
 
