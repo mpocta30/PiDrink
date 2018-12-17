@@ -110,6 +110,9 @@ $( document ).ready(function() {
         $(':button').prop('disabled', true);
 
         // Show loading gif
+        if($( '#cover' ).not(":visible")){
+            alert('Hidden');
+        }
         $('#cover').show();
         $('#loading').show();
 
