@@ -90,7 +90,7 @@ $( document ).ready(function() {
         e.preventDefault();
 
         // Disable all buttons
-        //$(':button').prop('disabled', true);
+        $(':button').prop('disabled', true);
 
         // Send value of select tag
         $.ajax({
@@ -100,7 +100,10 @@ $( document ).ready(function() {
                 drink_choice: $('#drink').val(),
             },
             success: function(data) {
-                alert(data.time);
+                waitTime = data.time;
+                setTimeout(function(){
+                    $(':button').prop('disabled', false);
+                }, waitTime*1000);
             }
         });
     });
