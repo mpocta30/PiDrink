@@ -76,12 +76,12 @@ $( document ).ready(function() {
 
     // Set values for pumps
     for(var i = 0; i < option_names.length; i++) {
-        $('#pump1').append('<option value="'+option_values[i]+'">'+option_names[i]+'</option>');
-        $('#pump2').append('<option value="'+option_values[i]+'">'+option_names[i]+'</option>');
-        $('#pump3').append('<option value="'+option_values[i]+'">'+option_names[i]+'</option>');
-        $('#pump4').append('<option value="'+option_values[i]+'">'+option_names[i]+'</option>');
-        $('#pump5').append('<option value="'+option_values[i]+'">'+option_names[i]+'</option>');
-        $('#pump6').append('<option value="'+option_values[i]+'">'+option_names[i]+'</option>');
+        $('#pump1').append('<option value="'+option_values[i]+'" class="text-center">'+option_names[i]+'</option>');
+        $('#pump2').append('<option value="'+option_values[i]+'" class="text-center">'+option_names[i]+'</option>');
+        $('#pump3').append('<option value="'+option_values[i]+'" class="text-center">'+option_names[i]+'</option>');
+        $('#pump4').append('<option value="'+option_values[i]+'" class="text-center">'+option_names[i]+'</option>');
+        $('#pump5').append('<option value="'+option_values[i]+'" class="text-center">'+option_names[i]+'</option>');
+        $('#pump6').append('<option value="'+option_values[i]+'" class="text-center">'+option_names[i]+'</option>');
     }
 
     // Show current value of pumps
