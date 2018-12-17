@@ -115,7 +115,7 @@ $( document ).ready(function() {
         // Prevent page refresh
         e.preventDefault();
 
-        alert( $( this ).serialize() );
+        alert($('#createdrink').serialize());
     });
 
     
