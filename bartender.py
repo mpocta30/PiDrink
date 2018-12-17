@@ -474,6 +474,7 @@ class Bartender(MenuDelegate):
 				self.menuContext.currentMenu.nextSelection()
 
 		# Get the drink making time
+		maxTime = 0
 		for ing in ingredients.keys():
 			for pump in self.pump_configuration.keys():
 				if ing == self.pump_configuration[pump]["value"]:
