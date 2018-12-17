@@ -364,7 +364,7 @@ class Bartender(MenuDelegate):
 		GPIO.output(pin, GPIO.HIGH)
 
 	def progressBar(self, waitTime):
-		interval = waitTime / 100.
+		interval = waitTime / 86.
         
 		for x in range(1, 101):		
 			# Clear display
