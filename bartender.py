@@ -371,7 +371,7 @@ class Bartender(MenuDelegate):
 		
 		# Clear the display
 		self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
-		self.disp.image(image)
+		self.disp.image(self.image)
 		self.disp.display()
         
 		for x in range(1, 101):
