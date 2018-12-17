@@ -19,7 +19,7 @@ def home():
 def make_drink():
     # Make sure a drink isn't already being made
     if bartender.running:
-        return jsonify(message="message": "A drink is currently being made,\
+        return jsonify(message="A drink is currently being made,\
                             come back later.", 404)
 
     # Get drink name
