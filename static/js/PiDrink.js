@@ -102,6 +102,7 @@ $( document ).ready(function() {
             success: function(data) {
                 waitTime = data.time;
                 setTimeout(function(){
+                    alert("Done");
                     $(':button').prop('disabled', false);
                 }, waitTime*1000);
             }
