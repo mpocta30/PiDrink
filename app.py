@@ -1,5 +1,5 @@
 from flask import Flask, json, render_template, request, jsonify
-#from bartender import Bartender
+from bartender import Bartender
 from pprint import pprint
 
 import ast
