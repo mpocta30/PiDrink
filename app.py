@@ -97,6 +97,8 @@ def change_pumps():
 @app.route('/createingredient', methods=['POST']) 
 def create_ingredient(): 
 
+    print("here")
+
     # Getting the name and value of ingredient
     ingredient_vals = request.form['ing_values']
     ingredient_vals = ast.literal_eval(ingredient_vals)

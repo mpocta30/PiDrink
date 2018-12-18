@@ -255,7 +255,7 @@ $( document ).ready(function() {
     });
 
 
-    // PUT request for user to make a new ingredient
+    // POST request for user to make a new ingredient
     $('#addingredient').submit(function(e) {
         // Prevent page refresh
         e.preventDefault();
@@ -279,7 +279,7 @@ $( document ).ready(function() {
             url: '/createingredient',
             type: 'POST',
             data: {
-                drink_values: JSON.stringify({name: ingredient_name, value: ingredient_value}),
+                ing_values: JSON.stringify({name: ingredient_name, value: ingredient_value}),
             },
             success: function() {
                 alert('You have successfully created ' + ingredient_name + '!');
