@@ -366,9 +366,14 @@ class Bartender(MenuDelegate):
 		GPIO.output(pin, GPIO.HIGH)
 
 	def progressBar(self, waitTime):
+		global stopprogram
+		
 		interval = waitTime / 116.3
         
 		for x in range(1, 101):		
+			if stopprogram:
+				return
+
 			# Clear display
 			self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
 			#self.draw.text((55,20), str(x) + '%', font = self.font, fill=255)
