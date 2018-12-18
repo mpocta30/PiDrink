@@ -96,15 +96,11 @@ def change_pumps():
 # API to for user to make a drink
 @app.route('/createingredient', methods=['POST']) 
 def create_ingredient(): 
-
-    print("here")
-
     # Getting the name and value of ingredient
     ingredient_vals = request.form['ing_values']
     ingredient_vals = ast.literal_eval(ingredient_vals)
     ingredient_name = ingredient_vals["name"]
     ingredient_value = ingredient_vals["value"]
-    print(ingredient_name, ingredient_value)
 
     # Create a new ingredient
     new_ingredient = {}
