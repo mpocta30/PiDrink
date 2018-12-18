@@ -146,6 +146,7 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt: 
         # Clean exit
+        bartender.endprogram()
         GPIO.cleanup()
         sys.exit(0)
 

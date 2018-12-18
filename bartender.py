@@ -34,6 +34,8 @@ GPIO.setmode(GPIO.BCM)
 USERNAME = "michaelpocta30@gmail.com"
 PASSWORD = "H3anover0"
 
+stopprogram = False
+
 SCREEN_WIDTH = 128
 SCREEN_HEIGHT = 32
 
@@ -498,11 +500,21 @@ class Bartender(MenuDelegate):
 				#self.disp.image(self.image)
 			#self.disp.display()
 
+	
+	def endprogram(self):
+		global stopprogram
+
+		stopprogram = True
+
+
 	def run(self):
 		self.startInterrupts()
 		# main loop
 		try:  
 			while True:
+				if stopprogram:
+					GPIO.cleanup()
+					return
 				# self.imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
 				# self.imap_server.login(USERNAME, PASSWORD)
 				# self.imap_server.select('INBOX')
