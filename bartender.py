@@ -508,7 +508,7 @@ class Bartender(MenuDelegate):
 
 		# Goodbye message
 		self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
-		self.draw.text((20,10), "Goodbye...", font=self.font, fill=255)
+		self.draw.text((25,10), "Goodbye...", font=self.font, fill=255)
 		self.disp.image(self.image)
 		self.disp.display()
 		time.sleep(3)
