@@ -427,6 +427,8 @@ class Bartender(MenuDelegate):
 
 		disp_process.join() 
 
+		print("Here")
+
 		if stopprogram:
 			return
 
