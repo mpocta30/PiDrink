@@ -513,7 +513,6 @@ class Bartender(MenuDelegate):
 		try:  
 			while True:
 				if stopprogram:
-					GPIO.cleanup()
 					return
 				# self.imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
 				# self.imap_server.login(USERNAME, PASSWORD)
