@@ -367,7 +367,7 @@ class Bartender(MenuDelegate):
 
 	def progressBar(self, waitTime):
 		global stopprogram
-		
+
 		interval = waitTime / 116.3
         
 		for x in range(1, 101):		
@@ -390,6 +390,8 @@ class Bartender(MenuDelegate):
                # self.disp.display()
 
 	def makeDrink(self, drink, ingredients):
+		global stopprogram
+
 		if self.running:
 			return
 
@@ -417,11 +419,16 @@ class Bartender(MenuDelegate):
 
                 
 		disp_process = threading.Thread(target=self.progressBar, args=(maxTime,))
-		pumpProcesses.append(disp_process) 
+		disp_process.start() 
 
-                # start the pump threads
+		# start the pump threads
 		for process in pumpProcesses:
 			process.start()
+
+		disp_process.join() 
+
+		if stopprogram:
+			return
 
 		# wait for threads to finish
 		for process in pumpProcesses:
