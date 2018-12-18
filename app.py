@@ -4,6 +4,7 @@ from pprint import pprint
 
 import ast
 import threading
+import signal
 import sys
 import RPi.GPIO as GPIO
   
@@ -130,9 +131,19 @@ def add_ingredient():
 
     print(ingredient)
     return ('', 200)
+
+
+def signal_handler(sig, frame):
+        print('You pressed Ctrl+C!')
+        bartender.endprogram()
+        GPIO.cleanup()
+        sys.exit(0)
+
   
 # main driver function 
 if __name__ == '__main__': 
+    # Control-C signal
+    signal.signal(signal.SIGINT, signal_handler)
 
     try: 
         bartender = Bartender()
@@ -146,7 +157,6 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt: 
         # Clean exit
-        print('Here')
         bartender.endprogram()
         GPIO.cleanup()
         sys.exit(0)
