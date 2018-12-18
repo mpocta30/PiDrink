@@ -513,17 +513,20 @@ class Bartender(MenuDelegate):
 			#self.disp.display()
 
 	
+	# Signal end of program
 	def endprogram(self):
 		global stopprogram
 
-		# Goodbye message
+		stopprogram = True
+
+
+	# Goodbye message
+	def goodbye(self):
 		self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
 		self.draw.text((20,10), "Goodbye", font=self.font, fill=255)
 		self.draw.text((20,20), "Have a great day!", font=self.font, fill=255)
 		self.disp.image(self.image)
 		self.disp.display()
-
-		stopprogram = True
 
 
 	def run(self):
