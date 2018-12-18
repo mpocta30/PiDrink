@@ -97,10 +97,12 @@ def change_pumps():
 @app.route('/createingredient', methods=['POST']) 
 def create_ingredient(): 
 
-    ingredient_name = request.form['name']
-    ingredient_value = request.form['value']
-    ingredient_name = ast.literal_eval(ingredient_name)
-    ingredient_value = ast.literal_eval(ingredient_value)
+    # Getting the name and value of ingredient
+    ingredient_vals = request.form['ing_values']
+    ingredient_vals = ast.literal_eval(ingredient_vals)
+    ingredient_name = ingredient_vals["name"]
+    ingredient_value = ingredient_vals["value"]
+    print(ingredient_name, ingredient_value)
 
     # Create a new ingredient
     new_ingredient = {}
