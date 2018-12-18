@@ -93,6 +93,35 @@ def change_pumps():
     return ('', 200)
 
 
+# API to for user to make a drink
+@app.route('/createingredient', methods=['POST']) 
+def create_ingredient(): 
+
+    ingredient_name = request.form['name']
+    ingredient_value = request.form['value']
+    ingredient_name = ast.literal_eval(ingredient_name)
+    ingredient_value = ast.literal_eval(ingredient_value)
+
+    # Create a new ingredient
+    new_ingredient = {}
+    ingredient_json = {}
+    new_ingredient['name'] = ingredient_name
+    new_ingredient['value'] = ingredient_value
+
+    # Read JSON containing list of drinks
+    drink_options = json.load(open('static/json/drink_options.json'))
+    drink_options = drink_options['drink_options']
+
+    # Add new drink to drink list
+    drink_options.append(new_ingredient)
+    ingredient_json['drink_options'] = drink_options
+
+    with open("static/json/drink_options.json", "w") as jsonFile:
+        json.dump(ingredient_json, jsonFile)
+
+    return ('', 200)
+
+
 # API to add a new ingredient
 @app.route('/addingredient', methods=['POST'])
 def add_ingredient():

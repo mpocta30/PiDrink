@@ -176,39 +176,6 @@ $( document ).ready(function() {
         });
     });
 
-
-    // PUT request for user to make a new ingredient
-    $('#addingredient').submit(function(e) {
-        // Prevent page refresh
-        e.preventDefault();
-
-        // User confirmation
-        if (!confirm("Are you sure you want to add this ingredient?")) {
-            return;
-        }
-
-        ingredient_name = $('#ingname').val()
-        ingredient_value = $('#ingval').val()
-
-        // Check if drink already exists
-        if(option_names.includes(ingredient_name.toLowerCase())){
-            alert("This ingredient alreay exists.");
-            return;
-        }
-
-        // Send form values
-        $.ajax({
-            url: '/createdrink',
-            type: 'POST',
-            data: {
-                drink_values: JSON.stringify({name: ingredient_name, value: ingredient_value}),
-            },
-            success: function() {
-                alert('You have successfully created ' + ingredient_name + '!');
-            }
-        });
-    });
-
     
     // Add new ingredient div
     var ingredient_count = 0;
@@ -286,4 +253,38 @@ $( document ).ready(function() {
             } 
         });
     });
+
+
+    // PUT request for user to make a new ingredient
+    $('#addingredient').submit(function(e) {
+        // Prevent page refresh
+        e.preventDefault();
+
+        // User confirmation
+        if (!confirm("Are you sure you want to add this ingredient?")) {
+            return;
+        }
+
+        ingredient_name = $('#ingname').val()
+        ingredient_value = $('#ingval').val()
+
+        // Check if drink already exists
+        if(option_names.includes(ingredient_name.toLowerCase())){
+            alert("This ingredient alreay exists.");
+            return;
+        }
+
+        // Send form values
+        $.ajax({
+            url: '/createingredient',
+            type: 'POST',
+            data: {
+                drink_values: JSON.stringify({name: ingredient_name, value: ingredient_value}),
+            },
+            success: function() {
+                alert('You have successfully created ' + ingredient_name + '!');
+            }
+        });
+    });
+
 });
