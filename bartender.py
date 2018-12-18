@@ -366,14 +366,9 @@ class Bartender(MenuDelegate):
 		GPIO.output(pin, GPIO.HIGH)
 
 	def progressBar(self, waitTime):
-		global stopprogram
-
 		interval = waitTime / 116.3
         
 		for x in range(1, 101):		
-			if stopprogram:
-				return
-
 			# Clear display
 			self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
 			#self.draw.text((55,20), str(x) + '%', font = self.font, fill=255)
@@ -390,8 +385,6 @@ class Bartender(MenuDelegate):
                # self.disp.display()
 
 	def makeDrink(self, drink, ingredients):
-		global stopprogram
-
 		if self.running:
 			return
 
@@ -419,18 +412,11 @@ class Bartender(MenuDelegate):
 
                 
 		disp_process = threading.Thread(target=self.progressBar, args=(maxTime,))
-		disp_process.start() 
+		pumpProcesses.append(disp_process) 
 
-		# start the pump threads
+                # start the pump threads
 		for process in pumpProcesses:
 			process.start()
-
-		disp_process.join() 
-
-		print("Here")
-
-		if stopprogram:
-			return
 
 		# wait for threads to finish
 		for process in pumpProcesses:
@@ -515,15 +501,12 @@ class Bartender(MenuDelegate):
 			#self.disp.display()
 
 	
-	# Signal end of program
 	def endprogram(self):
 		global stopprogram
 
 		stopprogram = True
 
-
-	# Goodbye message
-	def goodbye(self):
+		# Goodbye message
 		self.draw.rectangle((0,0,SCREEN_WIDTH, SCREEN_HEIGHT),outline=0,fill=0)
 		self.draw.text((20,10), "Goodbye", font=self.font, fill=255)
 		self.draw.text((20,20), "Have a great day!", font=self.font, fill=255)
