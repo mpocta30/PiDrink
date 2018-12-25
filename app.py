@@ -68,14 +68,14 @@ def create_drink():
     new_drink['ingredients'] = ing
 
     # Read JSON containing list of drinks
-    drink_list = json.load(open('static/json/drink_list.json'))
+    drink_list = json.load(open('/Documents/PiDrink/static/json/drink_list.json'))
     drink_list = drink_list['drink_list']
 
     # Add new drink to drink list
     drink_list.append(new_drink)
     drink_json['drink_list'] = drink_list
 
-    with open("static/json/drink_list.json", "w") as jsonFile:
+    with open("/Documents/PiDrink/static/json/drink_list.json", "w") as jsonFile:
         json.dump(drink_json, jsonFile)
 
     return ('', 200)
@@ -110,14 +110,14 @@ def create_ingredient():
     new_ingredient['value'] = ingredient_value
 
     # Read JSON containing list of drinks
-    drink_options = json.load(open('static/json/drink_options.json'))
+    drink_options = json.load(open('/Documents/PiDrink/static/json/drink_options.json'))
     drink_options = drink_options['drink_options']
 
     # Add new drink to drink list
     drink_options.append(new_ingredient)
     ingredient_json['drink_options'] = drink_options
 
-    with open("static/json/drink_options.json", "w") as jsonFile:
+    with open("/Documents/PiDrink/static/json/drink_options.json", "w") as jsonFile:
         json.dump(ingredient_json, jsonFile)
 
     return ('', 200)
