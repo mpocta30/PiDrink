@@ -78,6 +78,9 @@ def create_drink():
     with open("/home/pi/Documents/PiDrink/static/json/drink_list.json", "w") as jsonFile:
         json.dump(drink_json, jsonFile)
 
+    # Rebuild the menu
+    bartender.buildMenu()
+
     return ('', 200)
 
 
