@@ -91,9 +91,6 @@ def change_pumps():
     # Change pump configuration
     bartender.changeConfiguration(pumps)
 
-    # Rebuild the menu
-    bartender.buildMenu()
-
     return ('', 200)
 
 
