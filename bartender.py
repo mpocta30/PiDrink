@@ -7,7 +7,6 @@ import threading
 import traceback
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_SSD1306
-import adafruit_dotstar
 
 
 from subprocess import * 
@@ -27,6 +26,7 @@ from subprocess import call
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+from dotstar import Adafruit_DotStar
 from menu import MenuItem, Menu, Back, MenuContext, MenuDelegate
 
 GPIO.setmode(GPIO.BCM)
