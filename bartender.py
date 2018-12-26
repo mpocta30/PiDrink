@@ -26,7 +26,7 @@ from subprocess import call
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
-#from dotstar import Adafruit_DotStar
+from dotstar import Adafruit_DotStar
 from menu import MenuItem, Menu, Back, MenuContext, MenuDelegate
 
 GPIO.setmode(GPIO.BCM)
@@ -120,19 +120,19 @@ class Bartender(MenuDelegate):
 		self.drink_options = self.drink_options["drink_options"]
 
 		# setup pixels:
-		#self.numpixels = NUMBER_NEOPIXELS # Number of LEDs in strip
+		self.numpixels = NUMBER_NEOPIXELS # Number of LEDs in strip
 
 		# Here's how to control the strip from any two GPIO pins:
-		#datapin  = NEOPIXEL_DATA_PIN
-		#clockpin = NEOPIXEL_CLOCK_PIN
-		#self.strip = Adafruit_DotStar(self.numpixels, datapin, clockpin)
-		#self.strip.begin()           # Initialize pins for output
-		#self.strip.setBrightness(NEOPIXEL_BRIGHTNESS) # Limit brightness to ~1/4 duty cycle
+		datapin  = NEOPIXEL_DATA_PIN
+		clockpin = NEOPIXEL_CLOCK_PIN
+		self.strip = Adafruit_DotStar(self.numpixels, datapin, clockpin)
+		self.strip.begin()           # Initialize pins for output
+		self.strip.setBrightness(NEOPIXEL_BRIGHTNESS) # Limit brightness to ~1/4 duty cycle
 
 		# turn everything off
-		#for i in range(0, self.numpixels):
-		#	self.strip.setPixelColor(i, 0)
-		#self.strip.show() 
+		for i in range(0, self.numpixels):
+			self.strip.setPixelColor(i, 0)
+		self.strip.show() 
 
 		print('Done initializing')
 
@@ -395,8 +395,8 @@ class Bartender(MenuDelegate):
 		self.running = True
 
 		# launch a thread to control lighting
-	#	lightsThread = threading.Thread(target=self.cycleLights)
-	#	lightsThread.start()
+		lightsThread = threading.Thread(target=self.cycleLights)
+		lightsThread.start()
 
 		# Make a list for each potential time
 
@@ -424,11 +424,11 @@ class Bartender(MenuDelegate):
 			process.join()
 
 		# stop the light thread
-	    #	lightsThread.do_run = False
-	#	lightsThread.join()
+		lightsThread.do_run = False
+		lightsThread.join()
 
 		# show the ending sequence lights
-		#self.lightsEndingSequence()
+		self.lightsEndingSequence()
 
 
 		# reenable interrupts
